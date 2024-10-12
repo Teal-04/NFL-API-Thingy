@@ -1,4 +1,5 @@
 from time import sleep
+from team_abbreviations import team_abbreviations
 from dotenv import load_dotenv
 import os
 
@@ -37,11 +38,11 @@ def menu_choices():
         print("?. Filler")
         print("?. Filler")
         print("?. Filler")
-        print("2. Exit")
+        print("3. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            live_game_stat()
+            live_game_menu()
         elif choice == "2":
             exit()
         else:
@@ -52,11 +53,33 @@ def menu_choices():
                 print("")
 
 
-def live_game_stat():
-    # Placeholder
-    print("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    return
+# Live game stats menu
+def live_game_menu():
+    while True:
+        print("\n--- Live Game Stats Menu ---")
+        print("1. View Team Abbreviations")
+        print("2. View Live Game Info")
+        print("3. Return to Main Menu")
+        choice = input("Enter your choice: ")
 
+        if choice == "1":
+            show_team_abbreviations()
+        elif choice == "2":
+            view_live_game_info()
+        elif choice == "3":
+            return
+        else:
+            print("Invalid option. Please try again.")
+
+# Show list of team abbreviations
+def show_team_abbreviations():
+    print("\n--- List of NFL Team Abbreviations ---")
+    for abbr, team_name in team_abbreviations.items():
+        print(f"{abbr}: {team_name}")
+    print("\n")
+
+def view_live_game_info():
+    print("")
 
 
 if __name__ == "__main__":
