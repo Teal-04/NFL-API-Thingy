@@ -27,7 +27,10 @@ def menu():
 
         for i in range(1, 30):
             print("")
+        menu_choices()
 
+def menu_choices():
+    while True:
         print("Choose from the available options:")
         print("1. Live Game Stats")
         print("?. Filler")
@@ -41,8 +44,20 @@ def menu():
             live_game_stat()
         elif choice == "2":
             exit()
-menu()
+        else:
+            print("")
+            print("Invalid choice, try again please")
+            sleep(2)
+            for i in range(1, 10):
+                print("")
+
 
 def live_game_stat():
-
+    # Placeholder
+    print("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     return
+
+
+
+if __name__ == "__main__":
+    menu()
