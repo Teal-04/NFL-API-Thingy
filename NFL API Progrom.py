@@ -1,5 +1,4 @@
 from time import sleep
-
 from dotenv import load_dotenv
 import os
 
@@ -39,10 +38,11 @@ def menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            view_live_game_stat()
+            live_game_stat()
         elif choice == "2":
             exit()
 menu()
 
-def view_live_game_stat():
+def live_game_stat():
+
     return
