@@ -25,7 +25,7 @@ To get started with the NFL API project, follow these steps:
 3. Set up environment variables in a `.env` file, ensuring your API keys are correctly added.
 4. Run the application using the main Python file to start the project.
 
-![Setup Guide](https://example.com/setup-guide.png) <!-- Replace with your own setup guide image -->
+![Setup Guide](https://www.tiktok.com/@flockksaintss/video/7398314593010863390?q=i%20got%20it%20ah%20dive&t=1728785877514) <!-- Replace with your own setup guide image -->
 
 ---
 
