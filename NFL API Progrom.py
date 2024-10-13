@@ -16,8 +16,8 @@ def menu():
 
         print("This Program will allow you to harness the power of technology to see various stats about the NFL. Includes:")
         print("*Live Stat Coverage")
-        print("*Filler")
-        print("*Filler")
+        print("*Player Information")
+        print("*Team Information")
         print("*Filler")
         print("*Filler")
         print("*Filler")
@@ -40,16 +40,22 @@ def menu_choices():
         choice = input("Enter your choice: ")
 
         if choice == "1":
+            for i in range(1, 10):
+                print("")
             live_game_menu()
         elif choice == "2":
+            for i in range(1, 10):
+                print("")
             player_profile()
-        # elif choice == "3":
-        #     team_profile()
+        elif choice == "3":
+            for i in range(1, 10):
+                print("")
+            team_profile()
         elif choice == "4":
             exit()
         else:
             print("")
-            print("Invalid choice, try again please")
+            print("Invalid choice, try again please dear god")
             sleep(2)
             for i in range(1, 10):
                 print("")
@@ -73,12 +79,16 @@ def live_game_menu():
         elif choice == "3":
             return
         else:
-            print("Invalid option. Please try again.")
+            print("Invalid choice, its 1-3 -_-")
+            sleep(2)
+            for i in range(1, 10):
+                print("")
 
 def show_team_abbreviations():
     print("\n--- List of NFL Team Abbreviations ---")
     for abbr, team_name in team_abbreviations.items():
         print(f"{abbr}: {team_name}")
+    sleep(2)
     print("\n")
 
 def view_live_game_info():
@@ -127,6 +137,60 @@ def display_player_profile(profile):
 # ************************
 # DIVIDER FOR TEAM PROFILE
 # ************************
+
+def fetch_team_data():
+    url = f"https://api.sportsdata.io/v3/nfl/scores/json/Teams?key={api_key}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print("Error fetching team data.")
+        return None
+
+def display_team_profile(team_data):
+    if team_data:
+        print(f"Team Name: {team_data['FullName']}")
+        print(f"Conference: {team_data['Conference']}")
+        print(f"Division: {team_data['Division']}")
+        print(f"Stadium: {team_data['StadiumDetails']['Name']}")
+        print(f"Head Coach: {team_data['HeadCoach']}")
+        print(f"Offensive Scheme: {team_data['OffensiveScheme']}")
+        print(f"Defensive Scheme: {team_data['DefensiveScheme']}")
+        print("")
+    else:
+        print("Team not found.")
+
+def team_profile():
+    while True:
+        print("\nTeam Profile Menu:")
+        print("1. View Team Abbreviations")
+        print("2. Search Team Profile")
+        print("3. Exit to Main Menu")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            show_team_abbreviations()
+        elif choice == "2":
+            teams_data = fetch_team_data()
+            if teams_data:
+                team_abbreviation = input("Enter the team abbreviation: ").upper()
+                team_data = next((team for team in teams_data if team["Key"] == team_abbreviation), None)
+                display_team_profile(team_data)
+        elif choice == "3":
+            for i in range(1, 10):
+                print("")
+            break
+        else:
+            print("Invalid choice, its 1-3 -_-")
+            sleep(2)
+            for i in range(1, 10):
+                print("")
+
+# ***************
+# DIVIDER FOR
+# ***************
+
+
 
 
 
