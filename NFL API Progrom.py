@@ -3,6 +3,8 @@ from team_abbreviations import team_abbreviations
 from dotenv import load_dotenv
 import os
 import requests
+# Just want to shout out the amazing people who use Stack Overflow. I have learned more than I ever imagined I would on that website
+# Bless everyone who posts on there, this wouldn't be possible without y'all <3
 
 load_dotenv()
 api_key = os.getenv('API_KEY')
@@ -19,7 +21,7 @@ def menu():
         print("*Player Information")
         print("*Team Information")
         print("*Injury Details")
-        print("*Filler")
+        print("*Seasonal Stat Leaders")
         print("*Filler")
         print("*Filler")
         print("*And more soon to come!")
@@ -31,12 +33,14 @@ def menu():
 def menu_choices():
     while True:
         print("Choose from the available options:")
-        print("1. Live Game Stats")
+        print("1. Live Game Stats (W.I.P)")
         print("2. Player Profile")
         print("3. Team Profile")
         print("4. Injury Report")
+        print("5. Seasonal Stat Information")
         print("?. Filler")
-        print("5. Exit")
+        print("?. Filler")
+        print("6. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -56,6 +60,8 @@ def menu_choices():
                 print("")
             injury_report()
         elif choice == "5":
+            seasonal_stat_leader()
+        elif choice == "6":
             exit()
         else:
             print("")
@@ -214,7 +220,7 @@ def display_injury_report(injuries, team_abbr):
             print(f"Last Updated: {injury['Updated']}")
             print("-" * 30)
     else:
-        print(f"No injuries found for the {team_abbr}.")
+        print(f"No injuries found for the {team_abbr}")
 
 def injury_report():
     season = input("Enter the season (e.g: 2023REG): ")
@@ -225,9 +231,60 @@ def injury_report():
     if injuries:
         display_injury_report(injuries, team_abbr)
 
+# ******************************
+# DIVIDER FOR SEASONAL STAT INFO
+# ******************************
+
+def fetch_stat_leaders(season):
+    print("Waiting....")
+    url = f"https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStats/{season}?key={api_key}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        print("Error fetching data...")
+        return None
+
+def display_stat_leaders(stat_leaders):
+    print("Top Passing Yards Leaders:")
+    for player in sorted(stat_leaders, key=lambda x: x['PassingYards'], reverse=True)[:5]: # I don't quite get this, but all I know is lambda is thumbs up
+        print(f"{player['Name']}: {player['PassingYards']} yards")
+
+    print("\nTop Rushing Yards Leaders:")
+    for player in sorted(stat_leaders, key=lambda x: x['RushingYards'], reverse=True)[:5]:
+        print(f"{player['Name']}: {player['RushingYards']} yards")
+
+    print("\nTop Receptions Leaders:")
+    for player in sorted(stat_leaders, key=lambda x: x['Receptions'], reverse=True)[:5]:
+        print(f"{player['Name']}: {player['Receptions']} receptions")
+
+    print("\nTop Sack Leaders:")
+    sack_leaders = sorted(stat_leaders, key=lambda x: x.get('Sacks', 0), reverse=True)[:5]
+    for player in sack_leaders:
+        print(f"{player['Name']}: {player['Sacks']} sacks")
+
+    print("\nTop Interception Leaders:")
+    interception_leaders = sorted(stat_leaders, key=lambda x: x.get('Interceptions', 0), reverse=True)[:5]
+    for player in interception_leaders:
+        print(f"{player['Name']}: {player['Interceptions']} interceptions")
+
+    print("")
+    sleep(4)
+
+def seasonal_stat_leader():
+    season = input("Enter the season year (e.g: 2023): ")
+    stat_leaders = fetch_stat_leaders(season)
+
+    if stat_leaders:
+        display_stat_leaders(stat_leaders)
+    else:
+        print("Noting here.")
+
 # ***********
-
-
+# PLACEHOLDER
+# ***********
 
 
 if __name__ == "__main__":
