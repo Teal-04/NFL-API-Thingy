@@ -3,6 +3,7 @@
 Welcome to the **NFL API Project**! This repository is designed to help you explore NFL data including player profiles, team profiles, injury reports, and seasonal stat leaders. Whether you're a football enthusiast or a developer looking to work with sports data, this project is the perfect starting point.
 
 ![NFL Banner](https://media1.tenor.com/m/skuoQUGjtEAAAAAd/shannon-sharpe.gif)
+
 -Shannon Sharpe for the the normies
 ---
 
