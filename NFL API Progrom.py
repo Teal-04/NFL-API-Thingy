@@ -18,7 +18,7 @@ def menu():
         print("*Live Stat Coverage")
         print("*Player Information")
         print("*Team Information")
-        print("*Filler")
+        print("*Injury Details")
         print("*Filler")
         print("*Filler")
         print("*Filler")
@@ -34,9 +34,9 @@ def menu_choices():
         print("1. Live Game Stats")
         print("2. Player Profile")
         print("3. Team Profile")
+        print("4. Injury Report")
         print("?. Filler")
-        print("?. Filler")
-        print("4. Exit")
+        print("5. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -52,6 +52,10 @@ def menu_choices():
                 print("")
             team_profile()
         elif choice == "4":
+            for i in range(1, 10):
+                print("")
+            injury_report()
+        elif choice == "5":
             exit()
         else:
             print("")
@@ -186,10 +190,42 @@ def team_profile():
             for i in range(1, 10):
                 print("")
 
-# ***************
-# DIVIDER FOR
-# ***************
+# *************************
+# DIVIDER FOR INJURY REPORT
+# *************************
 
+def fetch_injury_report(season, week):
+    url = f"https://api.sportsdata.io/v3/nfl/stats/json/Injuries/{season}/{week}?key={api_key}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error fetching injury report: {response.status_code}")
+        return None
+
+def display_injury_report(injuries, team_abbr):
+    team_injuries = [injury for injury in injuries if injury['Team'] == team_abbr]
+    if team_injuries:
+        for injury in team_injuries:
+            print(f"Player: {injury['Name']}")
+            print(f"Position: {injury['Position']}")
+            # print(f"Injury: {injury['BodyPart']} - Status: {injury['Status']}") #<-- If you have paid version of API uncomment this
+            print(f"Last Updated: {injury['Updated']}")
+            print("-" * 30)
+    else:
+        print(f"No injuries found for the {team_abbr}.")
+
+def injury_report():
+    season = input("Enter the season (e.g: 2023REG): ")
+    week = input("Enter the week (e.g: 5): ")
+    team_abbr = input("Enter the team abbreviation: ").upper()
+
+    injuries = fetch_injury_report(season, week)
+    if injuries:
+        display_injury_report(injuries, team_abbr)
+
+# ***********
 
 
 
