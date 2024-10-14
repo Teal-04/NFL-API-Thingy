@@ -56,6 +56,6 @@ This project is licensed under the MIT License.
 
 ## 🙏 Acknowledgments
 
-Special thanks to the developers at [NFLData API](https://www.nflapi.com) for providing the fantastic API!
+Special thanks to the developers at [NFLData API]((https://sportsdata.io/developers/api-documentation/nfl)) for providing the fantastic API!
 
 ---
