@@ -17,13 +17,11 @@ def menu():
             print("")
 
         print("This Program will allow you to harness the power of technology to see various stats about the NFL. Includes:")
-        print("*Live Stat Coverage")
+        print("*Live Stat Coverage (WIP)")
         print("*Player Information")
         print("*Team Information")
         print("*Injury Details")
         print("*Seasonal Stat Leaders")
-        print("*Filler")
-        print("*Filler")
         print("*And more soon to come!")
         sleep(6.25)
         for i in range(1, 30):
