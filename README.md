@@ -22,10 +22,14 @@ To get started with the NFL API project, follow these steps:
 
 1. Clone the repository by using the git clone command and providing the repository link.
 2. Install dependencies using the appropriate package manager.
-3. Set up environment variables in a `.env` file, ensuring your API keys are correctly added.
-4. Run the application using the main Python file to start the project.
+3. Set up a new file and name it '.env' and include only this:
+   API_KEY=your_api_key_here
+4. Put this new file in the project folder.
+5. Run the application using the main Python file to start the project.
 
-
+*YOU WILL NEED THESE PACKAGES: 
+  - requests
+  - python-dotenv
 ---
 
 
